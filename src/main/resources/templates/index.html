@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html lang="en" layout:decorate="~{layout.html}" th:with="title=#{index.title}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" th:charset="#{application.encoding}"/>
+    <title th:text="#{index.title}"></title>
+</head>
+<body>
+<!--/*@thymesVar id="holder" type="gargoyle.calendar.web.services.CalConfigSessionHolder"*/-->
+<th:block layout:fragment="content">
+    <div class="row" th:if="${holder.hasError()}">
+        <div class="col"></div>
+        <div class="col">
+            <div class="alert alert-danger">
+                <i class="bi bi-exclamation-triangle-fill"></i>
+                <strong th:text="${holder.error.message}"></strong>
+                <div th:text="${holder.error.details}"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row" th:if="${holder.hasOutput()}">
+        <div class="col"></div>
+        <div class="col">
+            <div class="alert alert-success">
+                <h4 th:text="#{success}"></h4>
+                <th:block th:text="#{download}"></th:block>
+                <a target="_blank" th:href="@{/download}" th:text="${holder.year}"></a>
+            </div>
+        </div>
+    </div>
+    <form class="form" enctype="multipart/form-data" method="post">
+        <div class="row">
+            <div class="col">
+                <label class="form-label" for="year" th:text="#{year}"></label>
+            </div>
+            <div class="col">
+                <!--/*@thymesVar id="currentYear" type="java.time.Year"*/-->
+                <input class="form-control" id="year" name="year"
+                       th:value="${currentYear}"
+                       type="number"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label class="form-label" for="imageLocation" th:text="#{imageLocation}"></label>
+            </div>
+            <div class="col">
+                <input class="form-control" id="imageLocation" name="imageLocation" type="file"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col"></div>
+            <div class="col">
+                <button class="btn btn-primary" type="submit">
+                    <i class="bi bi-caret-right-square-fill"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+</th:block>
+</body>
+</html>

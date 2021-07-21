@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap-icons/font/bootstrap-icons.css}"/>
+    <link rel="stylesheet" th:href="@{/layout.css}"/>
+    <!--/*@thymesVar id="title" type="java.lang.String"*/-->
+    <title data-layout-title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE" th:text="#{application.name}"></title>
+</head>
+<body class="d-flex flex-column h-100">
+<header>
+    <th:block layout:fragment="header">
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#" th:href="@{/}" th:text="#{application.name}"></a>
+                <button aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"
+                        class="navbar-toggler"
+                        data-bs-target="#navbarCollapse" data-bs-toggle="collapse" type="button">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                        <li class="nav-item">
+                            <a aria-current="page" class="nav-link active" href="#" th:href="@{/}">Home</a>
+                        </li>
+                    </ul>
+                    <div class="d-flex">
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </th:block>
+</header>
+<main class="footer mt-auto py-3 bg-light flex-shrink-0">
+    <div class="container">
+        <!--/*@thymesVar id="title" type="java.lang.String"*/-->
+        <h1 class="mt-5" th:text="${title}"></h1>
+        <th:block layout:fragment="content"></th:block>
+    </div>
+</main>
+<footer class="footer mt-auto py-3 bg-light">
+    <div class="container text-muted">
+        <th:block layout:fragment="footer">
+            <div class="text-left float-start">
+                <th:block th:text="#{application.description}"></th:block>
+                <th:block th:text="#{application.build}"></th:block>
+            </div>
+            <div class="text-right float-end">
+                &copy;
+                <th:block th:text="#{application.inceptionYear}"></th:block>
+                <a target="_blank" th:href="#{application.organization.url}"
+                   th:text="#{application.organization.name}"></a>
+            </div>
+        </th:block>
+    </div>
+</footer>
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+</html>
