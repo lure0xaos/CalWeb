@@ -1,19 +1,13 @@
 package gargoyle.calendar.util.resources
 
-import java.io.IOException
 import java.io.InputStream
 import java.io.OutputStream
 import java.net.URL
 
 abstract class ResourceBase protected constructor(override val url: URL) : Resource {
 
-    override fun exists(): Boolean {
-        try {
-            url.openStream().use { return true }
-        } catch (e: IOException) {
-            return false
-        }
-    }
+    override fun exists(): Boolean =
+        runCatching { url.openStream().use { return true } }.isSuccess
 
     override val inputStream: InputStream
         get() =

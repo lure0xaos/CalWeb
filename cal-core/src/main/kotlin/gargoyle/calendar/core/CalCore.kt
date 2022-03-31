@@ -1,6 +1,5 @@
 package gargoyle.calendar.core
 
-import gargoyle.calendar.util.Interpolation
 import gargoyle.calendar.util.resources.Resource
 import java.awt.Color
 import java.awt.Font
@@ -54,8 +53,16 @@ class CalCore(private val config: CalConfig) {
         val lineHeight = CalUtil.lineHeight(canvas, config.daysFont)
         val canvasWidth = canvas.width
         val area: Rectangle2D = CalUtil.createRectangle(0.0, 0.0, canvasWidth.toDouble(), lineHeight.toDouble())
-        val text = Interpolation.interpolate(config.yearText, mapOf(PARAM_YEAR to year))
+        val text = interpolate(config.yearText, mapOf(PARAM_YEAR to year))
         write(canvas, area, text, config.yearFont, config.yearForeColor, config.yearBackColor, true)
+    }
+
+    private fun interpolate(text: String, params: Map<String, Any>): String {
+        var ret = text
+        params.forEach { (key, value) ->
+            ret = ret.replace("{$key}", value.toString())
+        }
+        return ret
     }
 
     private fun printYear(canvas: BufferedImage, portrait: Boolean, year: Year, locale: Locale) {
