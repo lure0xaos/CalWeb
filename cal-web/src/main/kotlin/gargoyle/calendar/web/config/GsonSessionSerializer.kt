@@ -2,7 +2,7 @@ package gargoyle.calendar.web.config
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import io.ktor.sessions.*
+import io.ktor.server.sessions.*
 import kotlin.reflect.KClass
 
 class GsonSessionSerializer<T : Any>(val type: KClass<T>, gson: Gson = Gson(), configure: GsonBuilder.() -> Unit = {}) :

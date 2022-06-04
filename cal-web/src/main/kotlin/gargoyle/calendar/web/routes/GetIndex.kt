@@ -39,8 +39,8 @@ import kotlinx.html.strong
 import kotlinx.html.title
 import kotlinx.html.ul
 import kotlinx.html.unsafe
-import io.ktor.application.*
-import io.ktor.html.*
+import io.ktor.server.application.*
+import io.ktor.server.html.*
 import io.ktor.util.pipeline.*
 import java.util.ResourceBundle
 import kotlin.collections.set
@@ -102,8 +102,8 @@ suspend fun PipelineContext<Unit, ApplicationCall>.getIndex() {
                             col { }
                             col {
                                 div(classes = "alert alert-success") {
-                                    h4 { +messages.getString("success") }
-                                    +messages.getString("download")
+                                    h4 { +messages["success"] }
+                                    +messages["download"]
                                     a(href = PATH_DOWNLOAD, target = ATarget.blank) { +session.year.toString() }
                                 }
                             }

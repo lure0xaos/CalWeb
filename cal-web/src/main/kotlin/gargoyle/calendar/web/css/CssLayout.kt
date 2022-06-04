@@ -4,7 +4,7 @@ import gargoyle.calendar.web.config.respondCss
 import kotlinx.css.minHeight
 import kotlinx.css.padding
 import kotlinx.css.px
-import io.ktor.application.*
+import io.ktor.server.application.*
 import io.ktor.util.pipeline.*
 
 suspend fun PipelineContext<Unit, ApplicationCall>.cssLayout() {

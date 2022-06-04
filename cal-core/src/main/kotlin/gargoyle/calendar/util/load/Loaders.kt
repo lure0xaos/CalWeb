@@ -21,9 +21,7 @@ open class Loaders {
         return this
     }
 
-    fun <T : Any> canLoad(targetType: KClass<T>): Boolean {
-        return loaders.containsKey(targetType)
-    }
+    fun <T : Any> canLoad(targetType: KClass<T>): Boolean = targetType in loaders
 
     @Suppress("UNCHECKED_CAST")
     fun <T : Any> load(targetType: KClass<T>, value: Resource): T =

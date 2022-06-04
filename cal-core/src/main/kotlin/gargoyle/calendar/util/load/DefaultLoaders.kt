@@ -1,10 +1,8 @@
-@file:Suppress("DEPRECATION")
-
 package gargoyle.calendar.util.load
 
+import gargoyle.calendar.util.audio.Audio
+import gargoyle.calendar.util.audio.AudioClip
 import gargoyle.calendar.util.resources.Resource
-import java.applet.Applet
-import java.applet.AudioClip
 import java.awt.Font
 import java.awt.Image
 import java.awt.image.BufferedImage
@@ -19,7 +17,7 @@ object DefaultLoaders : Loaders() {
     }
 
     private fun loadAudioClip(resource: Resource): AudioClip =
-        Applet.newAudioClip(resource.url)
+        Audio.newAudioClip(resource.url)
 
     private fun loadFont(resource: Resource): Font =
         run {
@@ -27,5 +25,9 @@ object DefaultLoaders : Loaders() {
         }
 
     private fun loadImage(resource: Resource): BufferedImage =
-        resource.inputStream.use { stream -> requireNotNull(ImageIO.read(stream)) { "cannot read image from $resource" } }
+        resource.inputStream.use { stream ->
+            requireNotNull(ImageIO.read(stream)) {
+                "cannot read image from $resource"
+            }
+        }
 }

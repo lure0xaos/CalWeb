@@ -5,7 +5,7 @@ version = "0.0.1-SNAPSHOT"
 
 plugins {
     kotlin("jvm")
-    java
+    application
 }
 
 repositories {
@@ -14,10 +14,10 @@ repositories {
 
 dependencies {
     implementation(project(":cal-core"))
+}
 
-    implementation(kotlin("stdlib"))
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
+application {
+    mainClass.set("gargoyle.calendar.cli.Cal")
 }
 
 java.sourceCompatibility = JavaVersion.toVersion(javaVersion)

@@ -42,22 +42,26 @@ object DefaultConverters : Converters() {
                     sh(it, SHIFT_BB).toInt(),
                     sh(it, SHIFT_AA, true).toInt()
                 )
+
                 6 -> Color(
                     sh(it, SHIFT_RR).toInt(),
                     sh(it, SHIFT_GG).toInt(),
                     sh(it, SHIFT_BB).toInt()
                 )
+
                 4 -> Color(
                     dbl(it, SHIFT_R).toInt(),
                     dbl(it, SHIFT_G).toInt(),
                     dbl(it, SHIFT_B).toInt(),
                     dbl(it, SHIFT_A, true).toInt()
                 )
+
                 3 -> Color(
                     dbl(it, SHIFT_R).toInt(),
                     dbl(it, SHIFT_G).toInt(),
                     dbl(it, SHIFT_B).toInt()
                 )
+
                 else -> error(color)
             }
         }

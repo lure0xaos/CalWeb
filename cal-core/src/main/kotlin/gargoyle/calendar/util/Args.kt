@@ -8,9 +8,8 @@ object Args {
 
     fun parseArgs(args: Array<String>): Map<String, String> =
         args
-            .map { it.split("=".toRegex(), 2).toTypedArray() }
-            .filter { it.size > 1 }
-            .associateTo(LinkedHashMap(args.size)) { it[0].trim() to it[1].trim() }
+            .map { it.substringBefore('=').trim(' ', '"', '\'') to it.substringAfter('=').trim(' ', '"', '\'') }
+            .associateTo(LinkedHashMap(args.size)) { it }
 
     fun parseArgs(keys: Array<String>, args: Array<String>): Map<String, String> {
         require(keys.size >= args.size) { "no matched args name" }

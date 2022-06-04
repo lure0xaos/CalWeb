@@ -6,8 +6,8 @@ import com.google.gson.stream.JsonWriter
 import gargoyle.calendar.util.resources.Resource
 import gargoyle.calendar.util.resources.Resources
 import gargoyle.calendar.web.data.CalConfigSession
-import io.ktor.application.*
-import io.ktor.sessions.*
+import io.ktor.server.application.*
+import io.ktor.server.sessions.*
 import io.ktor.util.pipeline.*
 import java.awt.Color
 import java.awt.Font

@@ -13,7 +13,7 @@ import java.time.format.TextStyle
 import java.time.temporal.ChronoField
 import java.time.temporal.TemporalAdjusters
 import java.time.temporal.TemporalField
-import java.util.Locale
+import java.util.*
 import kotlin.math.ceil
 import kotlin.math.floor
 import kotlin.math.sqrt
@@ -76,7 +76,7 @@ class CalCore(private val config: CalConfig) {
         val yearLineHeight = CalUtil.lineHeight(canvas, config.yearFont).toDouble()
         val monthHeight = (canvas.height - yearLineHeight) / monthsPerCol
         val dayHeight = CalUtil.lineHeight(canvas, config.daysFont).toDouble()
-        for (month in Month.values()) {
+        for (month in Month.entries) {
             val monthIndex = month.ordinal
             val col = monthIndex % monthsPerRow
             val row = monthIndex / monthsPerRow
@@ -130,7 +130,7 @@ class CalCore(private val config: CalConfig) {
         locale: Locale
     ) {
         val backColor = config.weekdaysBackColor
-        for (dayOfWeek in DayOfWeek.values()) {
+        for (dayOfWeek in DayOfWeek.entries) {
             val day = dayOfWeek.ordinal
             val x = areaX + day * dayWidth
             val dayArea: Rectangle2D = CalUtil.createRectangle(x, areaY, dayWidth, dayHeight)
@@ -174,7 +174,8 @@ class CalCore(private val config: CalConfig) {
         val weekLength = getLength(ChronoField.DAY_OF_WEEK).toInt()
         val maximum = range.maximum.toInt()
         val minimum = range.minimum.toInt()
-        for (day in minimum..maximum) {
+        val intRange: IntRange = minimum..maximum
+        for (day in intRange) {
             val idx = (weekdayIndex.ordinal + day - 1).toLong()
             val col = idx % weekLength
             val row = idx / weekLength

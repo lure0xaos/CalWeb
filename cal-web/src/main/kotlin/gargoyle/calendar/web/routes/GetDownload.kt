@@ -4,9 +4,9 @@ import gargoyle.calendar.cli.Cal
 import gargoyle.calendar.web.config.PATH_ROOT
 import gargoyle.calendar.web.config.getSession
 import gargoyle.calendar.web.data.ExceptionInfo
-import io.ktor.application.*
+import io.ktor.server.application.*
 import io.ktor.http.*
-import io.ktor.response.*
+import io.ktor.server.response.*
 import io.ktor.util.pipeline.*
 
 suspend fun PipelineContext<Unit, ApplicationCall>.getDownload() {

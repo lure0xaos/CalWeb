@@ -5,20 +5,16 @@ import gargoyle.calendar.core.CalCore
 import gargoyle.calendar.core.CalUtil
 import gargoyle.calendar.util.resources.FileSystemResource
 import gargoyle.calendar.util.resources.Resources
-import gargoyle.calendar.web.config.MODEL_IMAGE_LOCATION
-import gargoyle.calendar.web.config.MODEL_YEAR
-import gargoyle.calendar.web.config.PATH_ROOT
-import gargoyle.calendar.web.config.getSession
-import gargoyle.calendar.web.config.setSession
+import gargoyle.calendar.web.config.*
 import gargoyle.calendar.web.data.ExceptionInfo
-import io.ktor.application.*
 import io.ktor.http.content.*
-import io.ktor.request.*
-import io.ktor.response.*
+import io.ktor.server.application.*
+import io.ktor.server.request.*
+import io.ktor.server.response.*
 import io.ktor.util.pipeline.*
 import java.io.FileNotFoundException
 import java.time.Year
-import java.util.Locale
+import java.util.*
 import kotlin.io.path.createTempFile
 import kotlin.io.path.outputStream
 
@@ -44,6 +40,7 @@ suspend fun PipelineContext<Unit, ApplicationCall>.postIndex() {
                             }.getOrNull()?.let { path }
                         }
             }
+
             part.name == Cal.CMD_YEAR && part is PartData.FormItem ->
                 session.year = Year.of(part.value.toInt())
         }

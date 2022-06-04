@@ -29,15 +29,14 @@ object Cal {
         val year = Year.of(cmd.getOrDefault(CMD_YEAR, currentYear.toString()).toInt())
         val configResource = getResource(CONFIG_LOCATION, CalCore::class)
         val configuration: CalConfig = BeanModel.load(CalConfig::class, configResource)
-        val out: Resource = FileSystemResource(Paths.get(cmd.getOrDefault(CMD_OUT, year.toString() + SUFFIX)))
+        val out: Resource = FileSystemResource(Paths.get(cmd.getOrDefault(CMD_OUT, "$year$SUFFIX")))
         CalCore(configuration).createWrite(out, year, locale, FORMAT)
         if (!GraphicsEnvironment.isHeadless() && Desktop.isDesktopSupported()) {
             if (cmd.getOrDefault(CMD_SHOW, false.toString()).toBoolean()) {
-                val desktop = Desktop.getDesktop()
-                if (desktop.isSupported(Desktop.Action.BROWSE)) {
-                    val url = out.url
-                    val uri = url.toURI()
-                    desktop.browse(uri)
+                Desktop.getDesktop().apply {
+                    if (isSupported(Desktop.Action.BROWSE)) {
+                        browse(out.url.toURI())
+                    }
                 }
             }
         }
